@@ -9,7 +9,58 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 .edit-profile-modal--wrapper {
+  border-radius: 10px;
   background-color: #fefefe;
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 60%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.edit-profile-modal--exit-button {
+  border-radius: 10px 10px 0px 0px;
+  cursor: pointer;
+  background-color: #c2bebe;
+  padding: 10px;
+}
+
+.edit-profile-modal--form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 20px;
+}
+
+.edit-profile-modal--form__input {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.edit-profile-modal--form__input label {
+  min-width: 100px;
+  padding: 10px;
+}
+
+.edit-profile-modal--form__input input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: aliceblue;
+}
+
+.edit-profile-modal--form button {
+  cursor: pointer;
+  background-color: rgb(64, 64, 234);
+  color: white;
+  padding: 10px 80px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.edit-profile-modal--form button:hover {
+  background-color: rgb(106, 74, 231);
+  color: black;
 }

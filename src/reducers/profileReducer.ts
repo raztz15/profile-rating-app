@@ -1,6 +1,12 @@
 import { actionTypes } from "../constants/action-types";
+import { ProfileDataModel } from "../data-models/Profile";
 
-const initialState = {};
+const initialState = {
+  profiles: {
+    data: [],
+    status: "",
+  },
+};
 
 export const profileReducer = (state = initialState, action: any) => {
   switch (action.type) {
