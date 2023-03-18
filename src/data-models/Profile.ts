@@ -13,10 +13,12 @@ export class ProfileDataModel {
   }
 }
 
-enum ProfileTechnology {
-  "React",
-  "Angular",
-  "Java",
-  "JS",
-  "Type Script",
+export enum ProfileTechnology {
+  REACT = "React",
+  ANGULAR = "Angular",
+  JS = "JS",
+  JAVA = "Java",
+  ANDROID = "Android",
+  SWIFT = "Swift",
+  TS = "Type Script",
 }
