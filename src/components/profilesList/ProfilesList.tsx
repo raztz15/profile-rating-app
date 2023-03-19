@@ -71,15 +71,15 @@ export const ProfilesList = () => {
       </div>
       <div className="profile-list--profile">
         {data &&
-          data.map((item: IProfile, index: number) => {
+          data.map((profile, index) => {
             return (
               <div className="profile" key={index}>
-                <li>{item.name}</li>
-                <li>{item.lastName}</li>
-                <li>{item.age}</li>
-                <li>{item.technology}</li>
+                <li>{profile.name}</li>
+                <li>{profile.lastName}</li>
+                <li>{profile.age}</li>
+                <li>{profile.technology}</li>
                 <ProfileListActions
-                  item={item}
+                  item={profile}
                   setIsOpenEditModal={setIsOpenEditModal}
                   setIsOpenDeleteModal={setIsOpenDeleteModal}
                   setSelectedProfile={setSelectedProfile}

@@ -23,7 +23,9 @@ export const Modal = (props: IModal) => {
                         </div>
                         <ExitIcon onClick={() => setIsOpenModal(false)} />
                     </div>
-                    {children}
+                    <div className='modal-content'>
+                        {children}
+                    </div>
                     <div className='modal-buttons'>
                         {buttons.map(btn => {
                             return <div className={btn.className} onClick={btn.cb}>{btn.text}</div>
