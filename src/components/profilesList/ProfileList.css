@@ -78,3 +78,29 @@
   color: black;
   background-color: #f4c0c1;
 }
+
+.modal--buttons__delete {
+  background-color: #E25357;
+  padding: 8px 25px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.modal--buttons__cancel {
+  color: #60779b;
+  font-size: 16px;
+  padding: 8px 25px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal--buttons__delete:hover,
+.modal--buttons__cancel:hover {
+  background-color: #edf2ff;
+  color: black;
+}

@@ -89,8 +89,8 @@ export const EditProfileModal = (props: IEditProfileModal) => {
   const getModalProps = () => {
     return {
       title,
-      isOpenModal: isOpenEditModal,
-      setIsOpenModal: setIsOpenEditModal,
+      isOpen: isOpenEditModal,
+      setIsOpen: setIsOpenEditModal,
       children: <EditProfileModalForm formProps={getEditProfileModalFormProps()} />,
       buttons
     }

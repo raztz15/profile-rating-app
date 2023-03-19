@@ -1,41 +1,35 @@
 import './Modal.css'
-import { IModal } from '../../interfaces/ModalInterfaces'
+import { IModalProps } from '../../interfaces/ModalInterfaces'
 import ReactDOM from 'react-dom'
 import { ReactComponent as ExitIcon } from "../../assets/icons/close-modal-icon.svg";
 
-export const Modal = (props: IModal) => {
+export const Modal = (props: IModalProps) => {
 
     // Destructuring props
-    const { title, isOpenModal, buttons, children, setIsOpenModal } = props
+    const { title, isOpen, buttons, children, setIsOpen } = props
 
     // Creating higher level of html to the root app
     const portalElement = document.getElementById('portal')
 
-    if (!isOpenModal) return null
-
-    if (portalElement) {
-        return ReactDOM.createPortal(
-            <div className='modal-container'>
-                <div className='modal-wrapper'>
-                    <div className='modal-header'>
-                        <div className='modal-head'>
-                            <h4>{title}</h4>
-                        </div>
-                        <ExitIcon onClick={() => setIsOpenModal(false)} />
+    return isOpen && portalElement ? ReactDOM.createPortal(
+        <div className='modal-container'>
+            <div className='modal-wrapper'>
+                <div className='modal-header'>
+                    <div className='modal-title'>
+                        <h4>{title}</h4>
                     </div>
-                    <div className='modal-content'>
-                        {children}
-                    </div>
-                    <div className='modal-buttons'>
-                        {buttons.map(btn => {
-                            return <div className={btn.className} onClick={btn.cb}>{btn.text}</div>
-                        })}
-                    </div>
+                    <ExitIcon onClick={() => setIsOpen(false)} />
                 </div>
-            </div>,
-            portalElement
-        )
-    } else {
-        return null
-    }
+                <div className='modal-content'>
+                    {children}
+                </div>
+                <div className='modal-footer'>
+                    {buttons.map(({ className, cb, text }) => {
+                        return <div className={className} onClick={cb}>{text}</div>
+                    })}
+                </div>
+            </div>
+        </div>,
+        portalElement
+    ) : null
 }

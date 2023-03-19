@@ -50,14 +50,14 @@ export const ProfilesList = () => {
     {
       text: "Delete",
       cb: () => { console.log("Delete") },
-      className: "modal--buttons__Delete"
+      className: "modal--buttons__delete"
     },
   ]
 
   const getDeleteModalProps = () => {
     return {
-      isOpenModal: isOpenDeleteModal,
-      setIsOpenModal: setIsOpenDeleteModal,
+      isOpen: isOpenDeleteModal,
+      setIsOpen: setIsOpenDeleteModal,
       title: "Delete Profile",
       buttons: deleteModalButtons,
       children: "Are you sure you want to delete this profile?"

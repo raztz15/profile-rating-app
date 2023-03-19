@@ -1,9 +1,6 @@
 .modal-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 1000;
     background-color: rgba(0, 0, 0, .5);
 }
@@ -15,7 +12,7 @@
     transform: translate(-50%, -50%);
     z-index: 1000;
     border-radius: 10px;
-  background-color: #fefefe;
+    background-color: #fefefe;
 }
 
 .modal-header {
@@ -30,60 +27,22 @@
     cursor: pointer;
 }
 
-.modal-head {
+.modal-title {
     width: 100%;
   color: #60779b;
   text-align: center;
 }
 
 .modal-content {
-  /* background-color: red; */
  text-align: left; 
   color: #60779B;
-  /* padding: 15px 20px; */
   margin: 25px 25px;
 }
 
-.modal-buttons {
+.modal-footer {
     display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   padding: 20px 20px;
   gap: 10px;
-}
-
-.modal--buttons__Delete {
-  background-color: #E25357;
-  padding: 8px 25px;
-  border-radius: 6px;
-  letter-spacing: 1px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-}
-
-.modal--buttons__update {
-  background-color: #00c3ec;
-  color: white;
-  border-radius: 6px;
-  padding: 8px 25px;
-  letter-spacing: 1px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.modal--buttons__cancel {
-  color: #60779b;
-  font-size: 16px;
-  padding: 8px 25px;
-  letter-spacing: 1px;
-  font-weight: 700;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.modal--buttons__Delete:hover,
-.modal--buttons__cancel:hover {
-  background-color: #edf2ff;
-  color: black;
 }
