@@ -9,7 +9,8 @@ export interface IModalProps {
 }
 
 interface IModalButton {
+    id: string
     text: string
     cb: () => void
-    className?: string 
+    className?: string
 }

@@ -1,0 +1,23 @@
+.text-input--container {
+    display: flex;
+}
+
+.text-input--container label {
+    min-width: 100px;
+    color: #60779b;
+    padding: 10px;
+}
+
+.text-input--container input {
+    position: relative;
+  padding: 0px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  background-color: #edf2ff;
+  box-shadow: inset 8px 8px 16px #d7dee9, inset 8px 8px 16px #ffffff;
+}
+
+.text-input--container input:focus {
+    border: 1px solid #00c3ec;
+}

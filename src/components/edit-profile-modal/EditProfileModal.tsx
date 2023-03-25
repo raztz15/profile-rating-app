@@ -1,26 +1,25 @@
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import "./EditProfileModal.css";
 import { ProfileDataModel, ProfileTechnology } from "../../data-models/Profile";
-import { EditProfileModalForm } from "./EditProfileModalForm";
+import { EditProfileForm } from "./EditProfileForm";
 import { technologiesList } from "./editProfileModalProps";
-import { ReactComponent as ExitIcon } from "../../assets/icons/close-modal-icon.svg";
 import { useAppDispatch } from "../../reducers/rootReducer";
 import { editProfileAction } from "../../actions/profileActions";
 import { useClickOutside } from "../../util.service/utils";
 import { Modal } from "../modal/Modal";
+import { ConstGeneric } from "../../constants/ConstGeneric";
+import { ConstClassNames } from "../../constants/ConstClassNames";
 
 interface IEditProfileModal {
-  editProfilModalProps: {
-    title: string;
-    setIsOpenEditModal: (value: boolean) => void;
-    selectedProfile: ProfileDataModel | null;
-    isOpenEditModal: boolean;
-    children?: React.ReactNode;
-  };
+  title: string;
+  setIsOpenEditModal: (value: boolean) => void;
+  selectedProfile: ProfileDataModel | null;
+  isOpenEditModal: boolean;
+  children?: React.ReactNode;
 }
 
 export const EditProfileModal = (props: IEditProfileModal) => {
-  const { title, isOpenEditModal, setIsOpenEditModal, selectedProfile } = props.editProfilModalProps;
+  const { title, isOpenEditModal, setIsOpenEditModal, selectedProfile } = props;
   const [updatedProfile, setUpdatedProfile] = useState<ProfileDataModel>();
 
   const dispatch = useAppDispatch();
@@ -60,6 +59,8 @@ export const EditProfileModal = (props: IEditProfileModal) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log("name ===> ", name, "value ===> ", value);
+
     setUpdatedProfile({ ...updatedProfile!, [name]: value });
   };
 
@@ -73,16 +74,22 @@ export const EditProfileModal = (props: IEditProfileModal) => {
     setIsOpenEditModal(false)
   }
 
+  const updateCB = () => {
+    setIsOpenEditModal(false)
+  }
+
   const buttons = [
     {
-      text: "Cancel",
+      id: ConstGeneric.CANCEL,
+      text: ConstGeneric.CANCEL,
       cb: cancelCB,
-      className: "modal--buttons__cancel"
+      className: ConstClassNames.CANCEL_BUTTON
     },
     {
-      text: "Update",
-      cb: cancelCB,
-      className: "modal--buttons__update"
+      id: ConstGeneric.UPDATE,
+      text: ConstGeneric.UPDATE,
+      cb: updateCB,
+      className: ConstClassNames.UPDATE_BUTTON
     },
   ]
 
@@ -91,7 +98,7 @@ export const EditProfileModal = (props: IEditProfileModal) => {
       title,
       isOpen: isOpenEditModal,
       setIsOpen: setIsOpenEditModal,
-      children: <EditProfileModalForm formProps={getEditProfileModalFormProps()} />,
+      children: <EditProfileForm formProps={getEditProfileModalFormProps()} />,
       buttons
     }
 

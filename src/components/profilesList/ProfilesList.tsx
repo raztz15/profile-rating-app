@@ -1,19 +1,22 @@
+import "./ProfileList.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import "./ProfileList.css";
 import { setProfiles } from "../../actions/profileActions";
 import { EditProfileModal } from "../edit-profile-modal/EditProfileModal";
 import { RootState, useAppDispatch } from "../../reducers/rootReducer";
 import { ProfileListActions } from "./ProfileListActions";
 import { ProfileDataModel } from "../../data-models/Profile";
 import { ReactComponent as AddButton } from "../../assets/icons/add-button.svg";
-import { IProfile } from "../../interfaces/profilesInterfaces";
 import { Modal } from "../modal/Modal";
+import { deleteModalButtons, deleteModalContent, deleteModalTitle, editModalTitle } from "./ProfileListProps";
 
 export const ProfilesList = () => {
-  const [title] = useState("Edit Profile");
+
+  // Fetching data from store
   const { profiles } = useSelector((state: RootState) => state.allProfiles);
-  const [data, setData] = useState<Array<ProfileDataModel>>([]);
+
+  // Local state
+  const [data, setData] = useState<Array<ProfileDataModel>>();
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
   const [selectedProfile, setSelectedProfile] =
@@ -32,35 +35,39 @@ export const ProfilesList = () => {
     if (profiles) setData(profiles.data);
   }, [profiles]);
 
+  const cancelAction = () => {
+    setIsOpenDeleteModal(false)
+  }
+
+  const DeleteAction = () => {
+    setIsOpenDeleteModal(false)
+  }
+
+  // Props
   const getEditProfileModalProps = () => {
     return {
-      title,
+      title: editModalTitle,
       isOpenEditModal,
       setIsOpenEditModal,
       selectedProfile,
     };
   };
 
-  const deleteModalButtons = [
-    {
-      text: "Cancel",
-      cb: () => { console.log("Cancel") },
-      className: "modal--buttons__cancel"
-    },
-    {
-      text: "Delete",
-      cb: () => { console.log("Delete") },
-      className: "modal--buttons__delete"
-    },
-  ]
-
   const getDeleteModalProps = () => {
     return {
       isOpen: isOpenDeleteModal,
       setIsOpen: setIsOpenDeleteModal,
-      title: "Delete Profile",
-      buttons: deleteModalButtons,
-      children: "Are you sure you want to delete this profile?"
+      title: deleteModalTitle,
+      buttons: deleteModalButtons(cancelAction, DeleteAction),
+      children: deleteModalContent
+    }
+  }
+
+  const getProfileActionsProps = () => {
+    return {
+      setIsOpenEditModal,
+      setIsOpenDeleteModal,
+      setSelectedProfile
     }
   }
 
@@ -79,17 +86,15 @@ export const ProfilesList = () => {
                 <li>{profile.age}</li>
                 <li>{profile.technology}</li>
                 <ProfileListActions
-                  item={profile}
-                  setIsOpenEditModal={setIsOpenEditModal}
-                  setIsOpenDeleteModal={setIsOpenDeleteModal}
-                  setSelectedProfile={setSelectedProfile}
+                  profile={profile}
+                  {...getProfileActionsProps()}
                 />
               </div>
             );
           })}
       </div>
-      <EditProfileModal editProfilModalProps={getEditProfileModalProps()} />
-      {isOpenDeleteModal ? <Modal {...getDeleteModalProps()} /> : null}
+      <EditProfileModal {...getEditProfileModalProps()} />
+      <Modal {...getDeleteModalProps()} />
     </div>
   );
 };

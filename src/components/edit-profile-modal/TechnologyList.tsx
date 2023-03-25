@@ -23,18 +23,18 @@ export const TechnologyList = (props: ITechnologyList) => {
 
   return (
     <div className="technologies-list--container">
-      {technologiesList.map((item, index) => {
+      {technologiesList.map((technology, index) => {
         return (
           <li
             key={`${index} + technologies-list--container`}
-            value={item}
+            value={technology}
             onClick={(e) => [
               setIsListOpen(false),
-              setTechnologyValue(item),
-              setUpdatedProfile({ ...updatedProfile!, technology: item }),
+              setTechnologyValue(technology),
+              setUpdatedProfile({ ...updatedProfile!, technology }),
             ]}
           >
-            {item}
+            {technology}
           </li>
         );
       })}

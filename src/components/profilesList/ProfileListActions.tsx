@@ -2,18 +2,18 @@ import { ProfileDataModel } from "../../data-models/Profile";
 import { deleteProfileById } from "../../services/ProfileService";
 
 interface IProfileListActions {
-  item: any;
+  profile: ProfileDataModel;
   setIsOpenEditModal: (val: boolean) => void;
   setIsOpenDeleteModal: (val: boolean) => void;
   setSelectedProfile: (val: ProfileDataModel) => void;
 }
 
 export const ProfileListActions = (props: IProfileListActions) => {
-  const { setIsOpenEditModal, item, setSelectedProfile, setIsOpenDeleteModal } = props;
+  const { setIsOpenEditModal, profile, setSelectedProfile, setIsOpenDeleteModal } = props;
 
   const handleEditClick = () => {
     setIsOpenEditModal(true);
-    setSelectedProfile(item);
+    setSelectedProfile(profile);
   };
 
   const handleDeleteClick = () => {

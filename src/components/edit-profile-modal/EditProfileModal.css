@@ -1,16 +1,13 @@
 
 .edit-profile-modal--form {
-  /* padding: 20px; */
   display: flex;
   flex-direction: column;
-  /* margin-top: 30px; */
   align-items: center;
   gap: 10px;
 }
 
 .edit-profile-modal--form__input {
   display: flex;
-  /* gap: 20px; */
 }
 
 .edit-profile-modal--form__input label {
