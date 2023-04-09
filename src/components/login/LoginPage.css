@@ -1,0 +1,99 @@
+.login-page--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EBEBEB;
+    height: 100vh;
+}
+
+.login-page--wrapper {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    box-shadow: 0px 0px 20px #B4C1D5;
+    border-radius: 13px
+}
+
+.login-page--form__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    width: 50%;
+    border-right: 1px solid #60779B;
+}
+
+.login-page--form__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 40%;
+}
+
+.login-page--form__header {
+    color:#60779B;
+    font-weight: 800;
+    font-size: 30px;
+}
+
+.login-page--form__wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-page--form__wrapper input {
+    padding: 9px 10px;
+    width: 100%;   
+}
+
+.login-page--form__wrapper button {
+    width: 100%;
+    background-color: #00C3EC;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.login-page--form__seperator {
+    text-align: center;  
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #000; 
+    line-height: .1em;
+    margin: 10px 0 20px;   
+}
+
+.login-page--form__seperator span {
+    background-color: white;
+    padding: 0 10px
+}
+
+.login-page--form__signup {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.login-page--form__signup :nth-child(2) {
+    font-weight: 600;
+    cursor: pointer;
+} 
+
+.login-page--image__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 50%;
+}
+
+.login-page--image__container svg {
+    /* width: 1000px; */
+    border-radius: 6px;
+}

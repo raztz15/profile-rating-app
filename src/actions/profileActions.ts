@@ -1,10 +1,10 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 import { actionTypes } from "../constants/action-types";
 import { ProfileDataModel } from "../data-models/Profile";
 import { IProfile } from "../interfaces/profilesInterfaces";
 import {
   addProfile,
+  deleteProfileById,
   editProfile,
   getAllProfiles,
 } from "../services/ProfileService";
@@ -20,10 +20,10 @@ export const setProfiles = () => {
   };
 };
 
-export const editProfileAction = (id: string, body: IProfile) => {
+export const editProfileAction = (body: IProfile, id?: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      editProfile(id, body);
+      editProfile(body, id);
       dispatch({ type: actionTypes.EDIT_PROFILE, payload: body });
     } catch (error) {
       console.log("Couldn't edit profile ===> ", error);
@@ -32,6 +32,7 @@ export const editProfileAction = (id: string, body: IProfile) => {
 };
 
 export const createProfileAction = (profile: IProfile) => {
+
   return async (dispatch: Dispatch) => {
     try {
       addProfile(profile);
@@ -41,6 +42,20 @@ export const createProfileAction = (profile: IProfile) => {
     }
   };
 };
+
+export const deleteProfileAction = (profileId: string) => {
+  console.log("profileId ===> ", profileId);
+  return async (dispatch: Dispatch) => {
+    try {
+      deleteProfileById(profileId)
+      console.log("hello");
+
+      dispatch({ type: actionTypes.REMOVE_SELECTED_PROFILE, payload: profileId })
+    } catch (error) {
+      console.log("Couldn't delete Profile ===> ", error)
+    }
+  }
+}
 
 export const selectedProfile = (profile: ProfileDataModel) => {
   return { type: actionTypes.SELECTED_PROFILE, payload: profile };

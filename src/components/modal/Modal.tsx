@@ -24,8 +24,8 @@ export const Modal = (props: IModalProps) => {
                     {children}
                 </div>
                 <div className='modal-footer'>
-                    {buttons.map(({ className, cb, text }) => {
-                        return <div className={className} onClick={cb}>{text}</div>
+                    {buttons.map(({ className, cb, text }, idx) => {
+                        return <div key={idx} className={className} onClick={cb}>{text}</div>
                     })}
                 </div>
             </div>

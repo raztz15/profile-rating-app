@@ -1,5 +1,5 @@
+import { ConstGeneric } from "../../constants/ConstGeneric";
 import { ProfileDataModel } from "../../data-models/Profile";
-import { deleteProfileById } from "../../services/ProfileService";
 
 interface IProfileListActions {
   profile: ProfileDataModel;
@@ -18,19 +18,16 @@ export const ProfileListActions = (props: IProfileListActions) => {
 
   const handleDeleteClick = () => {
     setIsOpenDeleteModal(true)
-    // deleteProfileById(item._id);
+    setSelectedProfile(profile)
   };
 
   return (
     <div className="profile--buttons">
       <button className="profile--edit-button" onClick={handleEditClick}>
-        Edit
+        {ConstGeneric.EDIT}
       </button>
-      <button
-        className="profile--delete-button"
-        onClick={() => handleDeleteClick()}
-      >
-        Delete
+      <button className="profile--delete-button" onClick={handleDeleteClick}>
+        {ConstGeneric.DELETE}
       </button>
     </div>
   );

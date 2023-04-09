@@ -1,3 +1,4 @@
+import { ConstClassNames } from "../../constants/ConstClassNames";
 import { ConstGeneric } from "../../constants/ConstGeneric";
 import { ConstInputTypes } from "../../constants/ConstInputTypes";
 import { JsConst } from "../../constants/JsConst";
@@ -18,23 +19,40 @@ export const editProfileInputProps = (handleChange: (e: any) => void, selectedPr
     {
       label: ConstGeneric.NAME,
       type: ConstInputTypes.TEXT_TYPE,
-      defaultValue: selectedProfile?.name,
+      value: selectedProfile?.name,
       onChange: handleChange,
       name: JsConst.constName
     },
     {
       label: ConstGeneric.LAST_NAME,
       type: ConstInputTypes.TEXT_TYPE,
-      defaultValue: selectedProfile?.lastName,
+      value: selectedProfile?.lastName,
       onChange: handleChange,
       name: JsConst.lastName
     },
     {
       label: ConstGeneric.AGE,
       type: ConstInputTypes.TEXT_TYPE,
-      defaultValue: selectedProfile?.age,
+      value: selectedProfile?.age,
       onChange: handleChange,
       name: JsConst.age
     }
+  ]
+}
+
+export const buttonsProps = (cancelCB: () => void, updateCB: () => void) => {
+  return [
+    {
+      id: ConstGeneric.CANCEL,
+      text: ConstGeneric.CANCEL,
+      cb: cancelCB,
+      className: ConstClassNames.CANCEL_BUTTON
+    },
+    {
+      id: ConstGeneric.UPDATE,
+      text: ConstGeneric.UPDATE,
+      cb: updateCB,
+      className: ConstClassNames.UPDATE_BUTTON
+    },
   ]
 }

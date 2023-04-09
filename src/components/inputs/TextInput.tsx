@@ -3,12 +3,12 @@ import { InputInterface } from '../../interfaces/InputInterface'
 
 export const TextInput = (props: InputInterface) => {
 
-    const { label, type, defauldValue, onChange, name } = props
+    const { label, type, value, onChange, name, placeholder } = props
 
     return (
         <div className='text-input--container'>
             {label && <label>{label}</label>}
-            <input type={type} defaultValue={defauldValue} onChange={onChange} name={name} />
+            <input type={type} value={value} onChange={onChange} name={name} placeholder={placeholder} />
         </div>
     )
 }

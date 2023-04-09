@@ -1,5 +1,4 @@
 import { ProfileDataModel, ProfileTechnology } from "../../data-models/Profile";
-import { IProfile } from "../../interfaces/profilesInterfaces";
 
 interface ITechnologyList {
   technologyListProps: {

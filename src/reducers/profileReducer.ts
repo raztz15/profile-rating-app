@@ -27,6 +27,10 @@ export const profileReducer = (state = initialState, action: any) => {
       const profile = action.payload;
       const allProfiles = state.profiles.data.push(profile);
       return { ...state, profiles: { data: allProfiles } };
+    case actionTypes.REMOVE_SELECTED_PROFILE:
+      const profileId = action.payload
+      const newProfilesList = state.profiles.data.filter(profile => profile._id !== profileId)
+      return { ...state, profiles: { data: newProfilesList } }
     default:
       return state;
   }

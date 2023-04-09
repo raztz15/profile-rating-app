@@ -1,7 +1,8 @@
 export interface InputInterface {
     label?: string
     type: string
-    defauldValue?: string
+    value?: string | number
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     name: string
+    placeholder?: string
 }

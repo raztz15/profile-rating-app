@@ -3,7 +3,7 @@ import { IProfile } from "../interfaces/profilesInterfaces";
 
 // TODO insert all string into constants
 
-export const editProfile = (id: string, profileBody: IProfile) => {
+export const editProfile = (profileBody: IProfile, id?: string) => {
   axios
     .put(`http://localhost:8080/${id}`, profileBody)
     .then((res) => {
@@ -29,10 +29,12 @@ export const getAllProfiles = () => {
 };
 
 export const deleteProfileById = (id: string) => {
+
   axios
     .delete(`http://localhost:8080/${id}`)
     .then((res) => {
       const response = res.data;
+      console.log("id ---> ", id);
       return response;
     })
     .catch((err) => {

@@ -46,7 +46,7 @@ export const EditProfileForm = (props: IEditProfileModalForm) => {
 
   return (
     <form className="edit-profile-modal--form" onSubmit={(e) => handleSubmit(e)}>
-      {getInputProps().map((input, idx) => {
+      {getInputProps()?.map((input, idx) => {
         return <TextInput key={`${idx} input.label`} {...input} />
       })}
       <div className="edit-profile-modal--form__input">
@@ -54,7 +54,7 @@ export const EditProfileForm = (props: IEditProfileModalForm) => {
         <div className="modal-technology--input">
           <input
             type={ConstInputTypes.TEXT_TYPE}
-            value={technologyValue}
+            defaultValue={technologyValue}
             onClick={(e) => [handleChange(e), setIsListOpen(!isListOpen)]}
             name={JsConst.technology}
             readOnly />

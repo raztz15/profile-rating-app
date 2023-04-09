@@ -1,8 +1,8 @@
-import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import "./EditProfileModal.css";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { ProfileDataModel, ProfileTechnology } from "../../data-models/Profile";
 import { EditProfileForm } from "./EditProfileForm";
-import { technologiesList } from "./editProfileModalProps";
+import { buttonsProps, technologiesList } from "./editProfileModalProps";
 import { useAppDispatch } from "../../reducers/rootReducer";
 import { editProfileAction } from "../../actions/profileActions";
 import { useClickOutside } from "../../util.service/utils";
@@ -31,42 +31,26 @@ export const EditProfileModal = (props: IEditProfileModal) => {
   // });
 
   useEffect(() => {
-    setUpdatedProfile({
-      ...updatedProfile,
-      _id: selectedProfile ? selectedProfile._id : "",
-      name: selectedProfile ? selectedProfile!.name : "",
-      lastName: selectedProfile ? selectedProfile!.lastName : "",
-      age: selectedProfile ? selectedProfile!.age : 0,
-      technology: selectedProfile
-        ? selectedProfile!.technology
-        : ProfileTechnology.ANDROID,
-    });
+    if (selectedProfile) {
+      setUpdatedProfile({
+        ...updatedProfile,
+        _id: selectedProfile._id,
+        name: selectedProfile.name,
+        lastName: selectedProfile.lastName,
+        age: selectedProfile.age,
+        technology: selectedProfile.technology,
+      });
+    }
   }, [selectedProfile]);
-
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    dispatch(editProfileAction(selectedProfile!._id, updatedProfile!));
-    // dispatch(
-    //   createProfileAction({
-    //     name: "Yaron",
-    //     lastName: "Cohen",
-    //     age: 45,
-    //     technology: ProfileTechnology.TS,
-    //   })
-    // );
-    setIsOpenEditModal(false);
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log("name ===> ", name, "value ===> ", value);
-
     setUpdatedProfile({ ...updatedProfile!, [name]: value });
   };
 
   const getEditProfileModalFormProps = () => {
     return {
-      technologiesList, handleSubmit, handleChange, selectedProfile, setIsOpenEditModal, setUpdatedProfile, updatedProfile
+      technologiesList, handleSubmit: updateCB, handleChange, selectedProfile, setIsOpenEditModal, setUpdatedProfile, updatedProfile
     }
   };
 
@@ -75,23 +59,9 @@ export const EditProfileModal = (props: IEditProfileModal) => {
   }
 
   const updateCB = () => {
+    dispatch(editProfileAction(updatedProfile!, selectedProfile!._id));
     setIsOpenEditModal(false)
   }
-
-  const buttons = [
-    {
-      id: ConstGeneric.CANCEL,
-      text: ConstGeneric.CANCEL,
-      cb: cancelCB,
-      className: ConstClassNames.CANCEL_BUTTON
-    },
-    {
-      id: ConstGeneric.UPDATE,
-      text: ConstGeneric.UPDATE,
-      cb: updateCB,
-      className: ConstClassNames.UPDATE_BUTTON
-    },
-  ]
 
   const getModalProps = () => {
     return {
@@ -99,7 +69,7 @@ export const EditProfileModal = (props: IEditProfileModal) => {
       isOpen: isOpenEditModal,
       setIsOpen: setIsOpenEditModal,
       children: <EditProfileForm formProps={getEditProfileModalFormProps()} />,
-      buttons
+      buttons: buttonsProps(cancelCB, updateCB),
     }
 
   }

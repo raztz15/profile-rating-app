@@ -1,14 +1,17 @@
 import "./ProfileList.css";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { setProfiles } from "../../actions/profileActions";
+import { deleteProfileAction, setProfiles } from "../../actions/profileActions";
 import { EditProfileModal } from "../edit-profile-modal/EditProfileModal";
 import { RootState, useAppDispatch } from "../../reducers/rootReducer";
 import { ProfileListActions } from "./ProfileListActions";
-import { ProfileDataModel } from "../../data-models/Profile";
+import { ProfileDataModel, ProfileTechnology } from "../../data-models/Profile";
 import { ReactComponent as AddButton } from "../../assets/icons/add-button.svg";
 import { Modal } from "../modal/Modal";
-import { deleteModalButtons, deleteModalContent, deleteModalTitle, editModalTitle } from "./ProfileListProps";
+import { deleteModalButtons, deleteModalContent, deleteModalTitle, editModalTitle, saveProfileModalTitle } from "./ProfileListProps";
+import { deleteProfileById } from "../../services/ProfileService";
+import { EditProfileForm } from "../edit-profile-modal/EditProfileForm";
+import { technologiesList } from "../edit-profile-modal/editProfileModalProps";
 
 export const ProfilesList = () => {
 
@@ -19,6 +22,7 @@ export const ProfilesList = () => {
   const [data, setData] = useState<Array<ProfileDataModel>>();
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
+  const [isOpenSaveProfileModal, setIsOpenSaveProfileModal] = useState(false)
   const [selectedProfile, setSelectedProfile] =
     useState<ProfileDataModel | null>(null);
   const dispatch = useAppDispatch();
@@ -39,11 +43,49 @@ export const ProfilesList = () => {
     setIsOpenDeleteModal(false)
   }
 
-  const DeleteAction = () => {
-    setIsOpenDeleteModal(false)
+  const deleteAction = () => {
+    if (selectedProfile) {
+      deleteProfileAction(selectedProfile._id)
+      // setIsOpenDeleteModal(false)
+    }
+  }
+
+  const handleSubmit = () => {
+    console.log("Submit");
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
+    console.log("value ===> ", value);
+
   }
 
   // Props
+
+  const getSaveProfileFormProps = () => {
+    return {
+      formProps: {
+        handleSubmit,
+        handleChange,
+        setIsOpenEditModal: (val: boolean) => { },
+        selectedProfile: selectedProfile,
+        setUpdatedProfile: (val: ProfileDataModel) => { },
+        updatedProfile: selectedProfile || undefined,
+        technologiesList: technologiesList
+      }
+    }
+  }
+
+  const getSaveProfileModalProps = () => {
+    return {
+      isOpen: isOpenSaveProfileModal,
+      setIsOpen: setIsOpenSaveProfileModal,
+      title: saveProfileModalTitle,
+      buttons: deleteModalButtons(cancelAction, deleteAction),
+      children: <EditProfileForm {...getSaveProfileFormProps()} />
+    }
+  }
+
   const getEditProfileModalProps = () => {
     return {
       title: editModalTitle,
@@ -53,16 +95,6 @@ export const ProfilesList = () => {
     };
   };
 
-  const getDeleteModalProps = () => {
-    return {
-      isOpen: isOpenDeleteModal,
-      setIsOpen: setIsOpenDeleteModal,
-      title: deleteModalTitle,
-      buttons: deleteModalButtons(cancelAction, DeleteAction),
-      children: deleteModalContent
-    }
-  }
-
   const getProfileActionsProps = () => {
     return {
       setIsOpenEditModal,
@@ -71,10 +103,21 @@ export const ProfilesList = () => {
     }
   }
 
+  const getDeleteModalProps = () => {
+    return {
+      isOpen: isOpenDeleteModal,
+      setIsOpen: setIsOpenDeleteModal,
+      title: deleteModalTitle,
+      buttons: deleteModalButtons(cancelAction, deleteAction),
+      children: deleteModalContent,
+    }
+  }
+
   return (
     <div className="profiles-list--container">
       <div className="profiles-list--add-button">
-        <AddButton />
+        <AddButton onClick={() => setIsOpenEditModal(true)} />
+        <Modal {...getSaveProfileModalProps()} />
       </div>
       <div className="profile-list--profile">
         {data &&
@@ -94,7 +137,7 @@ export const ProfilesList = () => {
           })}
       </div>
       <EditProfileModal {...getEditProfileModalProps()} />
-      <Modal {...getDeleteModalProps()} />
+      <Modal  {...getDeleteModalProps()} />
     </div>
   );
 };
