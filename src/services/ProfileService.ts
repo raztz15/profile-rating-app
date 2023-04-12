@@ -17,7 +17,7 @@ export const editProfile = (profileBody: IProfile, id?: string) => {
 
 export const getAllProfiles = () => {
   const profiles = axios
-    .get(`http://localhost:8080/`)
+    .get(`http://localhost:8080/all-profiles`)
     .then((res) => {
       const response = res.data;
       return response;

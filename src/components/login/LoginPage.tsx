@@ -2,8 +2,13 @@ import './LoginPage.css'
 import React, { FormEvent, useState } from 'react'
 import { LoginPageForm } from './LoginPageForm'
 import { ReactComponent as WorkingManImage } from '../../assets/icons/login_image.svg'
+import { userLogin } from '../../services/LoginService'
+import { loginUserAction } from '../../actions/userActions'
+import { useAppDispatch } from '../../reducers/rootReducer'
 
 export const LoginPage = () => {
+
+    const dispatch = useAppDispatch()
 
     const [user, setUser] = useState({
         email: '',
@@ -15,8 +20,9 @@ export const LoginPage = () => {
         setUser(prevState => ({ ...prevState, [name]: value }))
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        dispatch(loginUserAction(user.email, user.password))
     }
 
     const getLoginFormProps = () => {
