@@ -15,13 +15,13 @@ export const LoginPageForm = (props: ILoginPageForm) => {
     const getInputsProps = () => {
         return [
             {
-                type: ConstInputTypes.EMAIL_TYPE,
+                type: ConstInputTypes.TEXT_TYPE,
                 onChange: handleChange,
                 name: ConstInputTypes.EMAIL_TYPE,
-                placeholder: ConstGeneric.EMAIL
+                placeholder: ConstGeneric.EMAIL_OR_USERNAME
             },
             {
-                type: ConstInputTypes.PASSWORD_TYPE,
+                type: ConstInputTypes.TEXT_TYPE,
                 onChange: handleChange,
                 name: ConstInputTypes.PASSWORD_TYPE,
                 placeholder: ConstGeneric.PASSWORD

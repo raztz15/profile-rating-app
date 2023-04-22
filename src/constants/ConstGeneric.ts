@@ -15,5 +15,6 @@ export class ConstGeneric {
     public static readonly QUESTION_MARK = "?"
     public static readonly SIGN_UP = "Sign up"
     public static readonly OR = "or"
+    public static readonly EMAIL_OR_USERNAME = "Email or Username"
     public static readonly DELETE_MODAL_CONTENT = `Are you sure you want to delete this profile?`
 }

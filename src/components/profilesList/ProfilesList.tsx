@@ -18,6 +18,9 @@ export const ProfilesList = () => {
   // Fetching data from store
   const { profiles } = useSelector((state: RootState) => state.allProfiles);
 
+  console.log("profiles ===> ", profiles);
+
+
   // Local state
   const [data, setData] = useState<Array<ProfileDataModel>>();
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false);

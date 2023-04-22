@@ -1,16 +1,24 @@
 import './LoginPage.css'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { LoginPageForm } from './LoginPageForm'
 import { ReactComponent as WorkingManImage } from '../../assets/icons/login_image.svg'
-import { userLogin } from '../../services/LoginService'
+import { saveLocalUser, userLogin } from '../../services/LoginService'
 import { loginUserAction } from '../../actions/userActions'
 import { useAppDispatch } from '../../reducers/rootReducer'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/store'
+import { useNavigate } from 'react-router-dom'
 
 export const LoginPage = () => {
 
+    // const { currentUser } = useSelector((state: RootState) => state.currentUser)
+
     const dispatch = useAppDispatch()
 
+    const nav = useNavigate()
+
     const [user, setUser] = useState({
+        username: '',
         email: '',
         password: ''
     })
@@ -22,13 +30,14 @@ export const LoginPage = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(loginUserAction(user.email, user.password))
+        await dispatch(loginUserAction(user.email, user.password))
+        nav('/all-profiles')
     }
 
     const getLoginFormProps = () => {
         return {
             handleChange,
-            handleSubmit
+            handleSubmit,
         }
     }
 
