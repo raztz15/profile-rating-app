@@ -62,7 +62,7 @@
 
 .login-page--form__seperator {
     text-align: center;  
-    width: 100%; 
+    /* width: 100%;  */
     text-align: center; 
     border-bottom: 1px solid #000; 
     line-height: .1em;

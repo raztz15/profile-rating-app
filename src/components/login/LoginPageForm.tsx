@@ -4,25 +4,23 @@ import { ConstInputTypes } from '../../constants/ConstInputTypes'
 import { TextInput } from '../inputs/TextInput'
 
 interface ILoginPageForm {
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
     handleSubmit: (e: FormEvent<HTMLFormElement>) => void
 }
 
 export const LoginPageForm = (props: ILoginPageForm) => {
 
-    const { handleChange, handleSubmit } = props
+    const { handleSubmit } = props
 
     const getInputsProps = () => {
         return [
             {
                 type: ConstInputTypes.TEXT_TYPE,
-                onChange: handleChange,
                 name: ConstInputTypes.EMAIL_TYPE,
                 placeholder: ConstGeneric.EMAIL_OR_USERNAME
             },
             {
                 type: ConstInputTypes.TEXT_TYPE,
-                onChange: handleChange,
                 name: ConstInputTypes.PASSWORD_TYPE,
                 placeholder: ConstGeneric.PASSWORD
             },

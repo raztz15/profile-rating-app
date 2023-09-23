@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { LoginPage } from "./components/login/LoginPage";
 import { ProfilesList } from "./components/profilesList/ProfilesList";
 import { ProtectedRoute } from "./components/protected-route/ProtectedRoute";
@@ -12,8 +12,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/all-profiles"
-            element={<ProtectedRoute path="/allProfiles" element={<ProfilesList />}></ProtectedRoute>} />
+            element={<ProtectedRoute path="/all-Profiles" element={<ProfilesList />}></ProtectedRoute>} />
           {/* <Route path="/all-profiles" element={<ProtectedRoute path="/all-profiles" element={<ProfilesList />} />} /> */}
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
       {/* <Router>

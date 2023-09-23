@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const LoginPage = () => {
 
-    // const { currentUser } = useSelector((state: RootState) => state.currentUser)
+    const { currentUser } = useSelector((state: RootState) => state.currentUser)
 
     const dispatch = useAppDispatch()
 
@@ -23,20 +23,28 @@ export const LoginPage = () => {
         password: ''
     })
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-        setUser(prevState => ({ ...prevState, [name]: value }))
-    }
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { name, value } = e.target
+    //     setUser(prevState => ({ ...prevState, [name]: value }))
+    // }
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault()
+    //     await dispatch(loginUserAction(user.email, user.password))
+    //     nav('/all-profiles')
+    // }
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        await dispatch(loginUserAction(user.email, user.password))
-        nav('/all-profiles')
+        console.log(e.target);
+
+        const formObj = Object.fromEntries(new FormData(e.target as HTMLFormElement))
+        await dispatch(loginUserAction(formObj.email as string, formObj.password as string))
     }
 
     const getLoginFormProps = () => {
         return {
-            handleChange,
+            // handleChange,
             handleSubmit,
         }
     }
